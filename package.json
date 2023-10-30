@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx http-server -c-1 ./docs",
+    "build": "cp docs/index.1.html docs/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
