@@ -1,0 +1,249 @@
+Ejecutable como documento HTML5
+  con autor allnulled
+  con nombre index
+  con versión 1
+<head>
+  <title>Notas</title>
+  <meta charset="utf8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="lib/win7.scoped.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0 !important;
+      font-size: 10px !important;
+      background-color: #333;
+    }
+    .cabecera_principal {
+      background-color: #333;
+      color: white;
+      font-family: Roboto;
+      border-bottom: 1px solid #CCC;
+    }
+    .celda_de_titulo {
+      width: 100%;
+    }
+    .titulo {
+      text-transform: uppercase;
+    }
+    .celda_de_titulo_de_nota {
+      width: 100%;
+    }
+    .lista_de_todas_las_notas {
+      background-color: #222;
+      color: white;
+    }
+    .lista_de_todas_las_notas > .nota {
+
+    }
+    .win7 button {
+      padding-left: 5px !important;
+      padding-right: 5px !important;
+    }
+    .win7 textarea.editor_de_notas {
+      width: 100%;
+      resize: vertical;
+      font-size: 8px;
+      min-height: 100px;
+      background-color: black;
+      color: white;
+    }
+  </style>
+</head>
+<body class="win7"><div id="app"></div></body>.
+
+importo api nativa.
+
+creo Almacenamiento_de_notas como {
+  cargar: una función donde {
+    creo variable datos_de_app como localStorage.getItem("APP_DE_NOTAS").
+    si datos_de_app es igual que null {
+      asigno datos_de_app como { notas: [] }.
+    } y si no {
+      asigno datos_de_app como JSON.parse(datos_de_app).
+    }.
+    retorno datos_de_app.notas.
+  } en errores imprimo error,
+  guardar: una función con (notas) donde {
+    creo variable datos_de_app como localStorage.getItem("APP_DE_NOTAS").
+    si datos_de_app es igual que null {
+      asigno datos_de_app como { notas: [] }.
+    } y si no {
+      asigno datos_de_app como JSON.parse(datos_de_app).
+    }.
+    asigno datos_de_app.notas como notas.
+    hago localStorage.setItem("APP_DE_NOTAS", datos_de_app textualizado).
+    retorno true.
+  } en errores imprimo error
+}.
+
+creo PaginaDeInicio como un componente vue2 con nombre "PaginaDeInicio" con plantilla {
+  <div class="PaginaDeInicio Component">
+    <div class="cabecera_principal">
+      <table>
+        <tr>
+          <td class="celda_de_titulo">
+            <div class="titulo">Todas las notas</div>
+          </td>
+          <td>
+            <button style="min-width: auto;" v-on:click="() => agregar_nota()">+</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="lista_de_todas_las_notas">
+      <div class="nota" v-for="nota, nota_index in root.todas_las_notas" v-bind:key="'nota-' + nota_index">
+        <table>
+          <tr>
+            <td class="celda_de_titulo_de_nota">
+              <div class="titulo_de_nota">{{ nota.titulo }}</div>
+            </td>
+            <td>
+              <button style="min-width: auto;" v-on:click="() => abrir_nota(nota_index)">📄</button>
+            </td>
+            <td>
+              <button style="min-width: auto;" v-on:click="() => cambiar_titulo_de_nota(nota_index)">✎</button>
+            </td>
+            <td>
+              <button style="min-width: auto;" v-on:click="() => eliminar_nota(nota_index)">✗</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      retorno {
+        
+      }.
+    }.
+    propiedad methods como {
+      método agregar_nota donde {
+        creo nombre como window.prompt("¿Qué nombre de nota nueva quieres?").
+        si nombre es tipo indefinido retorno.
+        si nombre es igual que null retorno.
+        si nombre.trim() es igual que "" retorno.
+        creo nota como { titulo: nombre, contenido: "" }.
+        hago this.root.todas_las_notas.push(nota).
+        hago this.$forceUpdate(true).
+        hago Almacenamiento_de_notas.guardar(this.root.todas_las_notas).
+      }.
+      método cambiar_titulo_de_nota con (nota_index) donde {
+        creo nombre como window.prompt("¿Qué nuevo nombre de nota quieres?").
+        si nombre es tipo indefinido retorno.
+        si nombre es igual que null retorno.
+        si nombre.trim() es igual que "" retorno.
+        asigno this.root.todas_las_notas[nota_index].titulo como nombre.
+        hago this.$forceUpdate(true).
+        hago Almacenamiento_de_notas.guardar(this.root.todas_las_notas).
+      }.
+      método abrir_nota con (nota_index) donde {
+        hago this.$router.history.push("/editar/nota/" + nota_index).
+      }.
+      método eliminar_nota con (nota_index) donde {
+        creo confirmacion como window.confirm("¿Seguro que quieres eliminar nota " + nota_index + "?").
+        si no confirmacion retorno.
+        hago this.root.todas_las_notas.splice(nota_index, 1).
+        hago this.$forceUpdate(true).
+        hago Almacenamiento_de_notas.guardar(this.root.todas_las_notas).
+      }.
+    }.
+  }.
+}.
+
+creo PaginaDeEditarNota como un componente vue2 con nombre "PaginaDeEditarNota" con plantilla {
+  <div class="PaginaDeEditarNota Component">
+    <div class="cabecera_principal">
+      <table>
+        <tr>
+          <td>
+            <button style="min-width: auto;" v-on:click="() => ir_atras()">←</button>
+          </td>
+          <td class="celda_de_titulo">
+            <div class="titulo">{{ titulo_de_nota }}</div>
+          </td>
+          <td>
+            <button style="min-width: auto;" v-on:click="() => guardar_nota()">💾</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div style="padding-right: 1px;">
+      <textarea class="editor_de_notas" v-model="contenido_de_nota"></textarea>
+    </div>
+  </div>
+} con lógica {
+  retorno {
+    propiedad props como {
+      root: {
+        type: Object,
+        required: true
+      }
+    }.
+    método data donde {
+      creo nota_index como this.$route.params.nota.
+      creo nota como this.root.todas_las_notas[nota_index].
+      retorno {
+        titulo_de_nota: nota.titulo,
+        contenido_de_nota: nota.contenido
+      }.
+    }.
+    propiedad methods como {
+      método ir_atras donde {
+        hago this.$router.history.push("/").
+      }.
+      método guardar_nota con () donde {
+        asigno this.root.todas_las_notas[this.$route.params.nota].contenido como this.contenido_de_nota.
+        hago Almacenamiento_de_notas.guardar(this.root.todas_las_notas).
+      }.
+    }.
+  }.
+}.
+
+creo App como una aplicación vue2 con nombre "App" con rutas [{
+  propiedad path como "/".
+  propiedad name como "Home".
+  propiedad component como PaginaDeInicio.
+  propiedad props como {}.
+}, {
+  propiedad path como "/editar/nota/:nota".
+  propiedad name como "EditarNota".
+  propiedad component como PaginaDeEditarNota.
+  propiedad props como {}.
+}] con traducciones {
+  propiedad es como {}.
+  propiedad en como {}.
+  propiedad ca como {}.
+} con plantilla {
+  <div class="App Component Castelog-app">
+    <router-view :root="this"></router-view>
+  </div>
+} con estilos {
+  html {}
+  body {}
+  .Component {}
+  .App {}
+} con lógica {
+  retorno {
+    método data donde {
+      retorno {
+        todas_las_notas: Almacenamiento_de_notas.cargar()
+      }.
+    }.
+    propiedad methods como {}.
+    propiedad watch como {}.
+    método beforeMount donde {}.
+    método mounted donde {}.
+  }.
+} montada en "#app".
