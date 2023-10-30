@@ -2,7 +2,7 @@
   <title>Notas</title>
   <meta charset="utf8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="/lib/img/book-50px.png" />
+  <link rel="icon" type="image/x-icon" href="/lib/img/book-50px.ico" />
   <link rel="stylesheet" href="lib/css/win7.scoped.css" />
   <link rel="manifest" href="manifest.json" />
   <style>
@@ -50,8 +50,15 @@
       color: white;
     }
   </style>
-</head><body class="win7"><div id="app"></div><script>
-// [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"index","version":"1","contenido":{"head":"<head>\n  <title>Notas</title>\n  <meta charset=\"utf8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"/lib/img/book-50px.png\" />\n  <link rel=\"stylesheet\" href=\"lib/css/win7.scoped.css\" />\n  <link rel=\"manifest\" href=\"manifest.json\" />\n  <style>\n    * {\n      box-sizing: border-box;\n    }\n    html, body {\n      margin: 0;\n      padding: 0 !important;\n      font-size: 10px !important;\n      background-color: #333;\n    }\n    .cabecera_principal {\n      background-color: #333;\n      color: white;\n      font-family: Roboto;\n      border-bottom: 1px solid #CCC;\n    }\n    .celda_de_titulo {\n      width: 100%;\n    }\n    .titulo {\n      text-transform: uppercase;\n    }\n    .celda_de_titulo_de_nota {\n      width: 100%;\n    }\n    .lista_de_todas_las_notas {\n      background-color: #222;\n      color: white;\n    }\n    .lista_de_todas_las_notas > .nota {\n\n    }\n    .win7 button {\n      padding-left: 5px !important;\n      padding-right: 5px !important;\n    }\n    .win7 textarea.editor_de_notas {\n      width: 100%;\n      resize: vertical;\n      font-size: 8px;\n      min-height: 100px;\n      background-color: black;\n      color: white;\n    }\n  </style>\n</head>","body":"<body class=\"win7\"><div id=\"app\"></div></body>"}}
+</head><body class="win7">
+  <div id="app"></div>
+  <script>
+  if("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("lib/js/service-worker.js");
+  }
+</script>
+<script>
+// [castelog:html5izable] ACTIVADO con: {"autor":"allnulled","nombre":"index","version":"1","contenido":{"head":"<head>\n  <title>Notas</title>\n  <meta charset=\"utf8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <link rel=\"icon\" type=\"image/x-icon\" href=\"/lib/img/book-50px.ico\" />\n  <link rel=\"stylesheet\" href=\"lib/css/win7.scoped.css\" />\n  <link rel=\"manifest\" href=\"manifest.json\" />\n  <style>\n    * {\n      box-sizing: border-box;\n    }\n    html, body {\n      margin: 0;\n      padding: 0 !important;\n      font-size: 10px !important;\n      background-color: #333;\n    }\n    .cabecera_principal {\n      background-color: #333;\n      color: white;\n      font-family: Roboto;\n      border-bottom: 1px solid #CCC;\n    }\n    .celda_de_titulo {\n      width: 100%;\n    }\n    .titulo {\n      text-transform: uppercase;\n    }\n    .celda_de_titulo_de_nota {\n      width: 100%;\n    }\n    .lista_de_todas_las_notas {\n      background-color: #222;\n      color: white;\n    }\n    .lista_de_todas_las_notas > .nota {\n\n    }\n    .win7 button {\n      padding-left: 5px !important;\n      padding-right: 5px !important;\n    }\n    .win7 textarea.editor_de_notas {\n      width: 100%;\n      resize: vertical;\n      font-size: 8px;\n      min-height: 100px;\n      background-color: black;\n      color: white;\n    }\n  </style>\n</head>","body":"<body class=\"win7\">\n  <div id=\"app\"></div>\n  &gt;script>\n  if(\"serviceWorker\" in navigator) {\n    navigator.serviceWorker.register(\"lib/js/service-worker.js\");\n  }\n&gt;/script>\n</body>"}}
 
 
 
