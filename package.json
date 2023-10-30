@@ -1,7 +1,7 @@
 {
   "name": "notas",
   "version": "1.0.0",
-  "description": "",
+  "description": "App de notas simple.",
   "main": "index.js",
   "scripts": {
     "start": "npx http-server -c-1 ./docs",

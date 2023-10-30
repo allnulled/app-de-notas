@@ -55,7 +55,14 @@ Ejecutable como documento HTML5
     }
   </style>
 </head>
-<body class="win7"><div id="app"></div></body>.
+<body class="win7">
+  <div id="app"></div>
+  <script>
+  if("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("lib/js/service-worker.js");
+  }
+</script>
+</body>.
 
 importo api nativa.
 
