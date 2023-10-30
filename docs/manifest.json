@@ -1,0 +1,15 @@
+{
+    "name": "Notas",
+    "short_name": "Notas",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#333333",
+    "description": "App de notas simple.",
+    "icons": [
+        {
+            "src": "lib/img/book-50px.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        }
+    ]
+}
